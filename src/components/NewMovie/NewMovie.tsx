@@ -12,14 +12,19 @@ export const NewMovie = ({ onAdd }: { onAdd: (movie: Movie) => void }) => {
   const [imdbUrl, setImdbUrl] = useState('');
   const [imdbId, setImdbId] = useState('');
 
-  const isFormValid = !!(title && imgUrl && imdbUrl && imdbId);
+  const isFormValid = !!(
+    title.trim() &&
+    imgUrl.trim() &&
+    imdbUrl.trim() &&
+    imdbId.trim()
+  );
 
   return (
     <form
       className="NewMovie"
       key={count}
-      onSubmit={e => {
-        e.preventDefault();
+      onSubmit={event => {
+        event.preventDefault();
         onAdd({
           title,
           description,
@@ -41,7 +46,7 @@ export const NewMovie = ({ onAdd }: { onAdd: (movie: Movie) => void }) => {
         name="title"
         label="Title"
         value={title}
-        onChange={e => setTitle(e)}
+        onChange={setTitle}
         required
       />
 
@@ -49,14 +54,14 @@ export const NewMovie = ({ onAdd }: { onAdd: (movie: Movie) => void }) => {
         name="description"
         label="Description"
         value={description}
-        onChange={e => setDescription(e)}
+        onChange={setDescription}
       />
 
       <TextField
         name="imgUrl"
         label="Image URL"
         value={imgUrl}
-        onChange={e => setImgUrl(e)}
+        onChange={setImgUrl}
         required
       />
 
@@ -64,7 +69,7 @@ export const NewMovie = ({ onAdd }: { onAdd: (movie: Movie) => void }) => {
         name="imdbUrl"
         label="Imdb URL"
         value={imdbUrl}
-        onChange={e => setImdbUrl(e)}
+        onChange={setImdbUrl}
         required
       />
 
@@ -72,7 +77,7 @@ export const NewMovie = ({ onAdd }: { onAdd: (movie: Movie) => void }) => {
         name="imdbId"
         label="Imdb ID"
         value={imdbId}
-        onChange={e => setImdbId(e)}
+        onChange={setImdbId}
         required
       />
 
